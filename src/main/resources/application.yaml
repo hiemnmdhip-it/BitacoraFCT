@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: bitacorafct
+  profiles:
+    active: dev # Perfil por defecto al arrancar desde el IDE
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+
+server:
+  port: 8080
+    
