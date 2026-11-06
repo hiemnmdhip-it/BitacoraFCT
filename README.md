@@ -1,2 +1,2 @@
-# BIT-CORAFCT
+# BITACORAFCT
 Micro-Reto formativo (Actividad Moodle)
