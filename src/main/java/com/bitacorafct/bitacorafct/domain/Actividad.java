@@ -9,30 +9,36 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
 
 @Entity
 @Table(name = "actividades")
+@Getter
 public class Actividad {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "jornada_id", nullable = false)
-	private Jornada jornada;
-	
-	@Column(name = "descripcion", length = 255, nullable = false)
-	private String descripcion;
-	
-	@Column(name = "horas", nullable = false)
-	private Double horas;
-	
-	public void Horas(Double horas) {
-		if (horas <0)
-			throw new IllegalArgumentException("Las horas no pueden ser negativas");
-		this.horas = horas;
-	}
-	
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "jornada_id", nullable = false)
+    private Jornada jornada;
+
+    @Column(name = "descripcion", length = 255, nullable = false)
+    private String descripcion;
+
+    @Column(name = "horas", nullable = false)
+    private double horas;
+
+    protected Actividad() {
+    }
+
+    public Actividad(Jornada jornada, String descripcion, double horas) {
+        if (horas <= 0) {
+            throw new IllegalArgumentException("Las horas deben ser mayores que 0");
+        }
+        this.jornada = jornada;
+        this.descripcion = descripcion;
+        this.horas = horas;
+    }
 }
