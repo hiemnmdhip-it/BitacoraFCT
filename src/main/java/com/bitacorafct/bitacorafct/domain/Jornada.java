@@ -13,18 +13,27 @@ import lombok.Getter;
 @Entity
 @Table(name = "jornadas")
 @Getter
-/*@NoArgsConstructor
-@AllArgsConstructor*/
 public class Jornada {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@Column(name = "fecha", nullable = false, unique = true)
-	private LocalDate fecha;
-	
-	@Column(name = "reflexion", columnDefinition = "TEXT", nullable = true)
-	private String reflexion;
-	
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "fecha", nullable = false, unique = true)
+    private LocalDate fecha;
+
+    @Column(name = "reflexion", columnDefinition = "TEXT")
+    private String reflexion;
+
+    protected Jornada() {
+    }
+
+    public Jornada(LocalDate fecha, String reflexion) {
+        this.fecha = fecha;
+        this.reflexion = reflexion;
+    }
+
+    public boolean tieneReflexion() {
+        return reflexion != null && !reflexion.isBlank();
+    }
 }
