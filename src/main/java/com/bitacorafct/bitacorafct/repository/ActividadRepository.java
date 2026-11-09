@@ -8,7 +8,7 @@ import com.bitacorafct.bitacorafct.domain.Actividad;
 
 public interface ActividadRepository extends JpaRepository<Actividad, Long> {
 
-    long countByJornadaId(Long jornadaId);
+    int countByJornadaId(Long jornadaId);
 
     @Query("""
     		SELECT COALESCE(SUM(a.horas), 0.0) 

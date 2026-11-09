@@ -33,7 +33,7 @@ public class Actividad {
     private double horas;
 
     public Actividad(Jornada jornada, String descripcion, double horas) {
-        if (horas <= 0) {
+        if (horas < 0) {
             throw new IllegalArgumentException("Las horas deben ser mayores que 0");
         }
         this.jornada = jornada;
