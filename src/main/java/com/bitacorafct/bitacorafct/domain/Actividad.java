@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Entity
@@ -18,6 +19,7 @@ public class Actividad {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -29,9 +31,6 @@ public class Actividad {
 
     @Column(name = "horas", nullable = false)
     private double horas;
-
-    protected Actividad() {
-    }
 
     public Actividad(Jornada jornada, String descripcion, double horas) {
         if (horas <= 0) {
