@@ -11,10 +11,12 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "actividades")
 @Getter
+@NoArgsConstructor
 public class Actividad {
 
     @Id

@@ -5,6 +5,7 @@ public class JornadaNoEncontradaException extends CuadernoException {
 	
     public JornadaNoEncontradaException(Long id) {
         super("No existe ninguna jornada con el identificador " + id + ".");
+        this.id = id;
     }
     
     public Long getId() {

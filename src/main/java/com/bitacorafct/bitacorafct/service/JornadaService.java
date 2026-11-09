@@ -34,8 +34,7 @@ public class JornadaService {
         if (jornadaRepository.existsByFecha(fecha)) {
             throw new JornadaDuplicadaException(fecha);
         }
-        Jornada jornada = jornadaRepository.save(new Jornada(fecha, reflexion));
-        return jornadaRepository.save(jornada).getId();
+        return jornadaRepository.save(new Jornada(fecha, reflexion)).getId();
     }
 
     @Transactional

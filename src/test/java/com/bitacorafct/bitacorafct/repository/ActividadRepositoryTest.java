@@ -52,6 +52,6 @@ class ActividadRepositoryTest {
         em.flush();
 
         assertEquals(2.0, actividadRepository.sumarHorasDeJornada(j1.getId()), 0.0001);
-        assertEquals(1L, actividadRepository.countByJornadaId(j1.getId()));
+        assertEquals(1, actividadRepository.countByJornadaId(j1.getId()));
     }
 }
