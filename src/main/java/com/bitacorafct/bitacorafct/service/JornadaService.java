@@ -35,11 +35,11 @@ public class JornadaService {
             throw new JornadaDuplicadaException(fecha);
         }
         Jornada jornada = jornadaRepository.save(new Jornada(fecha, reflexion));
-        return jornada.getId();
+        return jornadaRepository.save(jornada).getId();
     }
 
     @Transactional
-    public void anadirActividad(Long jornadaId, String descripcion, double horas) {
+    public void añadirActividad(Long jornadaId, String descripcion, double horas) {
         Jornada jornada = jornadaRepository.findById(jornadaId)
                 .orElseThrow(() -> new JornadaNoEncontradaException(jornadaId));
 
@@ -52,6 +52,21 @@ public class JornadaService {
         actividadRepository.save(new Actividad(jornada, descripcion, horas));
     }
 
+   /* @Transactional
+    public void añadirActividad(Long jornadaId, String descripcion, double horas) {
+    	if(!jornadaRepository.existsById(jornadaId)) {
+			throw new JornadaNoEncontradaException(jornadaId);
+		}
+    	double horasRegistradas = actividadRepository.sumarHorasDeJornada(jornadaId);
+    	Jornada jornada = jornadaRepository.findById(jornadaId).get();
+    	if (horasRegistradas + horas > MAX_HORAS_DIARIAS) {
+    		throw new LimiteHorasExcedidoException(jornada.getFecha(), horasRegistradas, horas);
+    	}
+    	Actividad actividad = new Actividad(jornada, descripcion, horas);
+    	actividadRepository.save(actividad); 
+    }*/
+    
+    
     @Transactional(readOnly = true)
     public List<JornadaResumenDTO> listarJornadas() {
         return jornadaRepository.findAllByOrderByFechaDesc().stream()
