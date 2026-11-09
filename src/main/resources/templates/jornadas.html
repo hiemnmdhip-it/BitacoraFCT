@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jornadas - BitácoraFCT</title>
+    <style>
+        body { font-family: sans-serif; margin: 2rem; }
+        table { border-collapse: collapse; min-width: 600px; }
+        th, td { border: 1px solid #ccc; padding: .5rem 1rem; text-align: left; }
+        th { background: #f0f0f0; }
+        .con-reflexion { color: #1a7f37; font-weight: bold; }
+        .pendiente { color: #b35900; font-weight: bold; }
+        .vacio { padding: 1rem; background: #f6f6f6; border: 1px dashed #aaa; }
+    </style>
+</head>
+<body>
+    <h1>Jornadas de prácticas</h1>
+
+    <p th:if="${#lists.isEmpty(jornadas)}" class="vacio">
+        Todavía no hay ninguna jornada registrada.
+    </p>
+
+    <table th:unless="${#lists.isEmpty(jornadas)}">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Actividades</th>
+                <th>Total de horas</th>
+                <th>Reflexión</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="j : ${jornadas}">
+                <td th:text="${#temporals.format(j.fecha(), 'EEEE dd/MM/yyyy', T(java.util.Locale).forLanguageTag('es-ES'))}">lunes 05/10/2026</td>
+                <td th:text="${j.numActividades()}">3</td>
+                <td th:text="${#numbers.formatDecimal(j.totalHoras(), 1, 1, 'COMMA')} + ' h'">8,0 h</td>
+                <td>
+                    <span th:if="${j.tieneReflexion()}" class="con-reflexion">✔ Hecha</span>
+                    <span th:unless="${j.tieneReflexion()}" class="pendiente">⚠ Pendiente</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
