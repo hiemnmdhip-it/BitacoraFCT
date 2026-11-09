@@ -39,7 +39,7 @@ public class JornadaService {
     }
 
     @Transactional
-    public void añadirActividad(Long jornadaId, String descripcion, double horas) {
+    public void anadirActividad(Long jornadaId, String descripcion, double horas) {
         Jornada jornada = jornadaRepository.findById(jornadaId)
                 .orElseThrow(() -> new JornadaNoEncontradaException(jornadaId));
 
