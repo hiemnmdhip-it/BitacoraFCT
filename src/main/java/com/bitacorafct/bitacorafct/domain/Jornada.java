@@ -25,9 +25,6 @@ public class Jornada {
     @Column(name = "reflexion", columnDefinition = "TEXT")
     private String reflexion;
 
-    protected Jornada() {
-    }
-
     public Jornada(LocalDate fecha, String reflexion) {
         this.fecha = fecha;
         this.reflexion = reflexion;
