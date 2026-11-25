@@ -12,4 +12,6 @@ public interface JornadaRepository extends JpaRepository<Jornada, Long> {
     boolean existsByFecha(LocalDate fecha);
 
     List<Jornada> findAllByOrderByFechaDesc();
+    
+    List<Jornada> findByFechaBetweenOrderByFechaAsc(LocalDate inicio, LocalDate fin);
 }

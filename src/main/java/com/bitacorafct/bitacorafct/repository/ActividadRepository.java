@@ -1,5 +1,7 @@
 package com.bitacorafct.bitacorafct.repository;
 
+import java.time.LocalDate;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,4 +18,11 @@ public interface ActividadRepository extends JpaRepository<Actividad, Long> {
     		WHERE a.jornada.id = :jornadaId
     		""")
     double sumarHorasDeJornada(@Param("jornadaId") Long jornadaId);
+    
+    @Query("""
+    		SELECT COALESCE(SUM(a.horas), 0.0) 
+    		FROM Actividad a 
+    		WHERE a.jornada.fecha BETWEEN :desde AND :hasta
+    		""")
+    double sumarHorasEntre(@Param("desde") LocalDate desde, @Param("hasta") LocalDate hasta);
 }

@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -105,6 +106,18 @@ class JornadaServiceTest {
         verify(actividadRepository, never()).save(any(Actividad.class));
     }
 
+   /* @Test
+    public void shouldThrowExceptionOnHourLimitExceeded() {
+    	Jornada j = new Jornada(fecha, "Jornada");
+    	when(jornadaRepository.existsById(1L)).thenReturn(true);
+    	when(actividadRepository.sumarHorasDeJornada(1L)).thenReturn(6.0);
+		when(jornadaRepository.findById(1L)).thenReturn(Optional.of(j));
+		assertThatThrownBy(() -> jornadaService.anadirActividad(1L, "Descripcion", 2.5))
+		.isInstanceOf(LimiteHorasExcedidoException.class)
+		.message().contains(fecha.toString());		
+		
+    }*/
+    
     @Test
     void anadirActividad_siLlegaJustoAlLimite_seGuarda() {
         Jornada jornada = new Jornada(fecha, null);
@@ -125,7 +138,7 @@ class JornadaServiceTest {
         jornadaService.anadirActividad(1L, "Escritura de tests", 4.0);
 
         ArgumentCaptor<Actividad> captor = ArgumentCaptor.forClass(Actividad.class);
-        verify(actividadRepository).save(captor.capture());
+        verify(actividadRepository,times(1)).save(captor.capture());
 
         Actividad guardada = captor.getValue();
         assertEquals("Escritura de tests", guardada.getDescripcion());
