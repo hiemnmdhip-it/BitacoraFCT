@@ -33,7 +33,7 @@ public class Jornada {
     private String reflexion;
     
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "cierre_id", nullable = false)
+    @JoinColumn(name = "cierre_id")
     private CierreSemanal cierreSemanal;
 
     public Jornada(LocalDate fecha, String reflexion) {

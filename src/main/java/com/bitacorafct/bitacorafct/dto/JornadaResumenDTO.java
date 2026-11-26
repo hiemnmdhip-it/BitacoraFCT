@@ -7,5 +7,6 @@ public record JornadaResumenDTO(
         LocalDate fecha,
         double totalHoras,
         int numActividades,
-        boolean tieneReflexion) {
+        boolean tieneReflexion,
+        boolean cerrada) {
 }

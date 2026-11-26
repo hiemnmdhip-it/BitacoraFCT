@@ -26,9 +26,15 @@ public class CierreSemanal {
     private LocalDate lunes;
 	
 	@Column(name = "total_horas")
-	private LocalDateTime totalHoras;
+	private double totalHoras;
 	
 	@Column(name = "fecha_cierre")
 	private LocalDateTime fechaCierre;
+	
+	public CierreSemanal(LocalDate lunes, double totalHoras) {
+	    this.lunes = lunes;
+	    this.totalHoras = totalHoras;
+	    this.fechaCierre = LocalDateTime.now();
+	}
 
 }

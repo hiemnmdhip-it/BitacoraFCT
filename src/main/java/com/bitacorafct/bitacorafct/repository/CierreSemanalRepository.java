@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.bitacorafct.bitacorafct.domain.CierreSemanal;
 
-public interface cierreSemanalRepository extends JpaRepository<CierreSemanal, Long> {
+public interface CierreSemanalRepository extends JpaRepository<CierreSemanal, Long> {
 	
-	boolean existisByLunes(LocalDate lunes);
+	boolean existsByLunes(LocalDate lunes);
 
 }

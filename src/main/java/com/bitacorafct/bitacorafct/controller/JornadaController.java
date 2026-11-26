@@ -1,10 +1,14 @@
 package com.bitacorafct.bitacorafct.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bitacorafct.bitacorafct.dto.JornadaResumenDTO;
 import com.bitacorafct.bitacorafct.service.JornadaService;
@@ -24,4 +28,12 @@ public class JornadaController {
         model.addAttribute("jornadas", jornadas);
         return "jornadas";
     }
+    
+    @PostMapping("/semanas/cerrar")
+    public String cerrarSemana(
+    		@RequestParam("fecha") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha) {
+    	jornadaService.cerrarSemana(fecha);
+    	return "redirect:/jornadas";	
+    }
+    
 }

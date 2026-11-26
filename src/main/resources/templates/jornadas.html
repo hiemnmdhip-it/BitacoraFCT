@@ -11,11 +11,20 @@
         th { background: #f0f0f0; }
         .con-reflexion { color: #1a7f37; font-weight: bold; }
         .pendiente { color: #b35900; font-weight: bold; }
+        .abierta { color: #0b5cad; font-weight: bold; }
+        .cerrada { color: #666; font-weight: bold; }
         .vacio { padding: 1rem; background: #f6f6f6; border: 1px dashed #aaa; }
+        form.cierre { margin-bottom: 1.5rem; }
     </style>
 </head>
 <body>
     <h1>Jornadas de prácticas</h1>
+
+    <form class="cierre" method="post" th:action="@{/semanas/cerrar}">
+        <label for="fecha">Cerrar la semana que contiene el día:</label>
+        <input type="date" id="fecha" name="fecha" required>
+        <button type="submit">Cerrar semana</button>
+    </form>
 
     <p th:if="${#lists.isEmpty(jornadas)}" class="vacio">
         Todavía no hay ninguna jornada registrada.
@@ -28,6 +37,7 @@
                 <th>Actividades</th>
                 <th>Total de horas</th>
                 <th>Reflexión</th>
+                <th>Estado</th>
             </tr>
         </thead>
         <tbody>
@@ -38,6 +48,10 @@
                 <td>
                     <span th:if="${j.tieneReflexion()}" class="con-reflexion">✔ Hecha</span>
                     <span th:unless="${j.tieneReflexion()}" class="pendiente">⚠ Pendiente</span>
+                </td>
+                <td>
+                    <span th:if="${j.cerrada()}" class="cerrada">🔒 Cerrada</span>
+                    <span th:unless="${j.cerrada()}" class="abierta">Abierta</span>
                 </td>
             </tr>
         </tbody>
